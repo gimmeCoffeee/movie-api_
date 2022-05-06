@@ -2,15 +2,15 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('Welcome to my book club!');
+    res.send('Welcome to my favorite movie list!');
 });
 
 app.get('/documentation', (req, res) => {
     res.sendFile('public/documentation.html', {root: __dirname});
 });
 
-app.get('/books', (req, res) => {
-    res.json(topMovies);
+app.get('/movies', (req, res) => {
+    res.sendFile('topmovies.js', {root: __dirname});
 });
 
 app.listen(8080, () => {
