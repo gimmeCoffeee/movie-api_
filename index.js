@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('Welcome to my top 10 movie list!');
+    res.send('Welcome to my top 10 movies list!');
 });
 
 app.use(express.static('public'));

@@ -28,7 +28,7 @@ let users = [
             "release": "2009"
         },
         {
-            "title": "The Hunger Games; Catching Fire",
+            "title": "The Hunger Games: Catching Fire",
             "director": "Francis Lawrence",
             "release": "2013"
         },
