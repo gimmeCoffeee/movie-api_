@@ -1,6 +1,6 @@
 let users = [
     {
-      id:1,
+      id: 1,
       fullname: 'John Doe',
       email: 'johndoe@mail.com',
       favMovies: [{
@@ -11,7 +11,7 @@ let users = [
       }]
     },
     {
-      id:2,
+      id: 2,
       fullname: 'Jane Doe',
       email: 'janedoe@mail.com',
       favMovies: [{
