@@ -7,7 +7,7 @@ let users = [
         "title": "The Devil Wears Prada",
         "director": "David Frankel",
         "release": "2006",
-        "genre": "Comedy/Drama"
+        "genre": "Comedy"
       }]
     },
     {
@@ -18,7 +18,7 @@ let users = [
         "title": "Harry Potter and the Half Blood Prince",
         "director": "David Yates",
         "release": "2009",
-        "genre": "Fantasy/Adventure"
+        "genre": "Fantasy"
       }]
     }
   
@@ -28,7 +28,7 @@ let users = [
             "title": "Harry Potter and the Half Blood Prince",
             "director": "David Yates",
             "release": "2009",
-            "genre": "Fantasy/Adventure"
+            "genre": "Fantasy"
         },
         {
             "title": "The Hunger Games: Catching Fire",
@@ -40,7 +40,7 @@ let users = [
             "title": "The Devil Wears Prada",
             "director": "David Frankel",
             "release": "2006",
-            "genre": "Comedy/Drama"
+            "genre": "Comedy"
         },
         {
             "title": 'White Oleander',
@@ -52,7 +52,7 @@ let users = [
             "title": "The Girl with the Dragon Tattoo",
             "director": "David Fincher",
             "release": "2011",
-            "genre": "Thriller/Mystery"
+            "genre": "Thriller"
         },
         {
             "title": "Dune",
@@ -82,7 +82,7 @@ let users = [
             "title": "Maleficent",
             "director": "Robert Stromberg",
             "release": "2014",
-            "genre": "Fantasy/Adventure"
+            "genre": "Fantasy"
         }
     ];
 
