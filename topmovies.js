@@ -20,6 +20,17 @@ let users = [
         "release": "2009",
         "genre": "Fantasy"
       }]
+    },
+    {
+      id: 3,
+      fullname: 'Mike Jones',
+      email: 'mikejones@mail.com',
+      favMovies: [{
+        "title": "The Devil Wears Prada",
+        "director": "David Frankel",
+        "release": "2006",
+        "genre": "Comedy"
+      }]
     }
   
   ];
@@ -35,6 +46,12 @@ let users = [
             "director": "Francis Lawrence",
             "release": "2013",
             "genre": "Sci-Fi"
+        },
+        {
+            "title": "Red Sparrow",
+            "director": "Francis Lawrence",
+            "release": "2018",
+            "genre": "Action"
         },
         {
             "title": "The Devil Wears Prada",
