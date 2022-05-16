@@ -36,7 +36,7 @@ let users = [
   ];
     let movies = [
         {
-            "title": "Harry Potter and the Half Blood Prince",
+            "title": "Harry Potter and the Half-Blood Prince",
             "director": "David Yates",
             "release": "2009",
             "genre": "Fantasy"
