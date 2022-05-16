@@ -4,6 +4,9 @@ const express = require('express');
       users = require('../movie-api_/topmovies').users;
       uuid = require('uuid');
       bodyParser = require('body-parser');
+      mongoose = require('mongoose');
+
+const models = require('.models.js');
 
 const app = express();
 
