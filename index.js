@@ -1,17 +1,16 @@
 const express = require('express');
-const { default: mongoose } = require('mongoose');
-      morgan = require('morgan');
-      movies = require('../movie-api_/topmovies').movies;
-      users = require('../movie-api_/topmovies').users;
-      uuid = require('uuid');
-      bodyParser = require('body-parser');
-      mongoose = require('mongoose');
-      models = require('.models.js');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const movies = require('../movie-api_/topmovies').movies;
+const users = require('../movie-api_/topmovies').users;
+const uuid = require('uuid');
+const bodyParser = require('body-parser');
+const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/MoviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://GimmeCoffeee:20fIRE!22pLACE@cluster0.uvfl6.mongodb.net/MoviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 
@@ -57,11 +56,33 @@ app.get('/movies/director/:director', (req, res) => {
 });
 
 app.post('/users/register', (req, res) => {
-  users.push(req.body);
-  res.send('Registeration Successful!');
+  Users.findOne({ Username: req.body.Username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) =>{res.status(201).json(user) })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+        })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
+
 app.get('/users', (req, res) => {
-  res.send(users);
+  Users.find().then(users=>{console.log(users); return res.send(users) }).catch(err=>{console.log(err); res.send(err) })
 });
 
 app.put('/users/update/:id', (req, res) => {
