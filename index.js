@@ -1,8 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const movies = require('../movie-api_/topmovies').movies;
-const users = require('../movie-api_/topmovies').users;
 const uuid = require('uuid');
 const bodyParser = require('body-parser');
 const Models = require('./models.js');
@@ -26,7 +24,7 @@ app.get('/documentation', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-    res.json(movies);
+  Movies.find().then(movies=>{console.log(movies); return res.send(movies) }).catch(err=>{console.log(err); res.send(err) });
 });
 
 app.listen(8080, () => {
