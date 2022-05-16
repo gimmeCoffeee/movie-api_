@@ -1,12 +1,17 @@
 const express = require('express');
+const { default: mongoose } = require('mongoose');
       morgan = require('morgan');
       movies = require('../movie-api_/topmovies').movies;
       users = require('../movie-api_/topmovies').users;
       uuid = require('uuid');
       bodyParser = require('body-parser');
       mongoose = require('mongoose');
+      models = require('.models.js');
 
-const models = require('.models.js');
+const Movies = Models.Movie;
+const Users = Models.User;
+
+mongoose.connect('mongodb://localhost:27017/MoviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 
