@@ -39,18 +39,17 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/movies/title/:title', (req, res) => {
-    const movie = movies.find((m)=> m.title == req.params.title);
-    res.send(movie);
+  Movies.findOne({ Title: req.params.title }).then(movies=>{ return res.send(movies) }).catch(err=>{console.log(err); res.send(err) });
 });
 
 app.get('/movies/genre/:genre', (req, res) => {
-  const movies_ = movies.filter((m)=> m.genre == req.params.genre);
-  res.send(movies_);
+  Movies.findOne({ 'Genre.Name': req.params.genre }).then(movies=>{ return res.send(movies.Genre) }).catch(err=>{console.log(err); res.send(err) });
+
 });
 
 app.get('/movies/director/:director', (req, res) => {
-  const director = movies.filter((m)=> m.director == req.params.director);
-  res.send(director);
+  Movies.findOne({ 'Director.Name': req.params.director }).then(movies=>{ return res.send(movies.Director) }).catch(err=>{console.log(err); res.send(err) });
+
 });
 
 app.post('/users/register', (req, res) => {
@@ -84,26 +83,66 @@ app.get('/users', (req, res) => {
 });
 
 app.put('/users/update/:id', (req, res) => {
-    let userId =  users.findIndex((u)=>u.id==req.params.id);
-    users.slice(userId,1, {...req.body});
-    res.send('Changes saved successfully!');
-    res.send(users);
+  Users.findOneAndUpdate({ Username: req.params.id }, { $set:
+    {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  },
+  { new: true }, 
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 app.post('/favourite/add/:id/:title', (req, res) => {
-    const user = users.find((u) => u.id ==req.params.id);
-    user.favMovies.push(req.body);
-    res.send('Movie added to favorites!')
+  Users.findOneAndUpdate({ Username: req.params.id }, {
+    $push: { FavoriteMovies: req.params.title }
+  },
+  { new: true }, 
+ (err, updatedUser) => {
+   if (err) {
+     console.error(err);
+     res.status(500).send('Error: ' + err);
+   } else {
+     res.json(updatedUser);
+   }
+ });
 });
 
 app.delete('/favourite/delete/:id/:title', (req, res) => {
-  const user = users.find((u) => u.id ==req.params.id);
-  const favs = user.favMovies.filter((m)=>m.title != req.params.title)
-  user.favMovies = [...favs];
-  res.send('Movie has been removed from favorites');
+  Users.findOneAndUpdate({ Username: req.params.id }, {
+    $pull: { FavoriteMovies: req.params.title }
+  },
+  { new: true },
+ (err, updatedUser) => {
+   if (err) {
+     console.error(err);
+     res.status(500).send('Error: ' + err);
+   } else {
+     res.json(updatedUser);
+   }
+ });
 });
 
 app.delete('/users/deregister/:id', (req, res) => {
-    users.filter((m) => m.id !=req.params.id);
-    res.send('User account successfully removed!')
+  Users.findOneAndRemove({ Username: req.params.id })
+  .then((user) => {
+    if (!user) {
+      res.status(400).send(req.params.id + ' was not found');
+    } else {
+      res.status(200).send(req.params.id + ' was deleted.');
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
 });
