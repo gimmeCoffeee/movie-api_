@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const uuid = require('uuid');
 const bodyParser = require('body-parser');
 const Models = require('./models.js');
+const passport = require('passport');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -11,6 +12,8 @@ const Users = Models.User;
 mongoose.connect('mongodb+srv://GimmeCoffeee:20fIRE!22pLACE@cluster0.uvfl6.mongodb.net/MoviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
+
+let auth = require('./auth')(app);
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -23,7 +26,7 @@ app.get('/documentation', (req, res) => {
     res.sendFile('public/documentation.html', {root: __dirname});
 });
 
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find().then(movies=>{console.log(movies); return res.send(movies) }).catch(err=>{console.log(err); res.send(err) });
 });
 
