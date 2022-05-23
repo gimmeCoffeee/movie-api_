@@ -13,6 +13,9 @@ mongoose.connect('mongodb+srv://GimmeCoffeee:20fIRE!22pLACE@cluster0.uvfl6.mongo
 
 const app = express();
 
+const cors = require('cors');
+app.use(cors());
+
 let auth = require('./auth')(app);
 
 app.use(express.static('public'));
