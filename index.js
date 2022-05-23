@@ -8,6 +8,7 @@ const passport = require('passport');
 
 const Movies = Models.Movie;
 const Users = Models.User;
+const PORT = process.env.PORT || 8080;
 
 mongoose.connect('mongodb+srv://GimmeCoffeee:20fIRE!22pLACE@cluster0.uvfl6.mongodb.net/MoviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -45,7 +46,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) 
   Movies.find().then(movies=>{console.log(movies); return res.send(movies) }).catch(err=>{console.log(err); res.send(err) });
 });
 
-app.listen(8080, () => {
+app.listen(PORT, () => {
     console.log('Your app is listening on port 8080.');
 });
 
