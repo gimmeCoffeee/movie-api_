@@ -71,6 +71,7 @@ app.get('/movies/director/:director', passport.authenticate('jwt', { session: fa
 });
 
 app.post('/users/register', (req, res) => {
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
