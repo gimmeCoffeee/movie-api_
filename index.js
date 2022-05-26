@@ -16,6 +16,8 @@ const app = express();
 
 const cors = require('cors');
 
+// heroku test
+
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
 app.use(cors({
